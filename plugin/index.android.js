@@ -13,47 +13,47 @@ var tagLayer = null;
 var tagManager = null;
 
 exports.initalize = function (config) {
-    if(config.containerId){
-        var context = application.android.context;
-        tagManager = com.google.android.gms.tagmanager.TagManager.getInstance(context);
-        if (config.logLevel && !!availableLoggingTypes[config.logLevel]) {
-           tagManager.setVerboseLoggingEnabled(true);
-        }
+    // if(config.containerId){
+    //     var context = application.android.context;
+    //     tagManager = com.google.android.gms.tagmanager.TagManager.getInstance(context);
+    //     if (config.logLevel && !!availableLoggingTypes[config.logLevel]) {
+    //        tagManager.setVerboseLoggingEnabled(true);
+    //     }
 
-        var context = application.android.context;
-        var res = context.getResources().getIdentifier(config.containerId.replace('-', '_').toLowerCase(), "raw", context.getPackageName());
+    //     var context = application.android.context;
+    //     var res = context.getResources().getIdentifier(config.containerId.replace('-', '_').toLowerCase(), "raw", context.getPackageName());
 
-        var pending = tagManager.loadContainerPreferNonDefault(
-         config.containerId,
-         res);
+    //     var pending = tagManager.loadContainerPreferNonDefault(
+    //      config.containerId,
+    //      res);
 
-        var containerHolder = pending.await(0, java.util.concurrent.TimeUnit.SECONDS);
-        if (containerHolder.status != com.google.android.gms.common.api.Status.RESULT_SUCCESS) {
-              // deal with failure
-              console.error('Error while creating container');
-        } else {
-            console.log("Tag Manager Initialized with config: " + JSON.stringify(config) + " at " + new Date());
-        }
+    //     var containerHolder = pending.await(0, java.util.concurrent.TimeUnit.SECONDS);
+    //     if (containerHolder.status != com.google.android.gms.common.api.Status.RESULT_SUCCESS) {
+    //           // deal with failure
+    //           console.error('Error while creating container');
+    //     } else {
+    //         console.log("Tag Manager Initialized with config: " + JSON.stringify(config) + " at " + new Date());
+    //     }
  
-        tagLayer = com.google.android.gms.tagmanager.TagManager.getInstance(context).getDataLayer();
+    //     tagLayer = com.google.android.gms.tagmanager.TagManager.getInstance(context).getDataLayer();
 
         
-    } else {
-        throw "Sup boss, how do you plan on tracking with no containerId?  Please add it to the config";
-    }
+    // } else {
+    //     throw "Sup boss, how do you plan on tracking with no containerId?  Please add it to the config";
+    // }
 }
 
 exports.log = function(logJson){
-    if (tagLayer) {
-      var map = new java.util.HashMap();
+    // if (tagLayer) {
+    //   var map = new java.util.HashMap();
 
-      Object.keys(logJson).forEach(key => {
-          map.put(key, logJson[key]);
-      });
-      console.log("Tag Manager Event: Log : " + map + " at " + new Date());
-      tagLayer.push(map);
-    }
-    else {
-      console.error('Looks like you tried to log before initialization!');
-    }
+    //   Object.keys(logJson).forEach(key => {
+    //       map.put(key, logJson[key]);
+    //   });
+    //   console.log("Tag Manager Event: Log : " + map + " at " + new Date());
+    //   tagLayer.push(map);
+    // }
+    // else {
+    //   console.error('Looks like you tried to log before initialization!');
+    // }
 }
