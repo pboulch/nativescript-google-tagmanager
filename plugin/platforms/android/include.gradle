@@ -6,6 +6,18 @@ android {
   }
 }
 
-dependencies {
-    compile 'com.google.android.gms:play-services-tagmanager:11.0.+'
+repositories {
+    jcenter()
+    mavenCentral()
+    maven {
+        url "https://maven.google.com" // Google's Maven repository
+    }
 }
+
+dependencies {
+    // Use the nativescript-plugin-firebase version settings
+    def googlePlayServicesVersion = project.hasProperty('googlePlayServicesVersion') ? project.googlePlayServicesVersion : "11.2.2"
+    compile "com.google.android.gms:play-services-tagmanager:$googlePlayServicesVersion"
+}
+
+apply plugin: "com.google.gms.google-services"
