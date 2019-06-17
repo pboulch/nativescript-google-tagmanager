@@ -2,7 +2,7 @@
 
 ## Add Plugin ##
 ```
-tns plugin add nativescript-google-tagmanager 
+tns plugin add pboulch/nativescript-google-tagmanager
 ```
 
 ## Prequisities ##
